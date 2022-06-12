@@ -3,18 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
+import 'package:netflix_clone/core/colors/strings.dart';
 import 'package:netflix_clone/core/constants.dart';
+import 'package:netflix_clone/infrastructure/api.dart';
+import 'package:netflix_clone/infrastructure/api.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../infrastructure/api.dart';
 
 class VideoListGenerator extends StatelessWidget {
   int index;
 
   VideoListGenerator({Key? key, required this.index}) : super(key: key);
    var videoUrlList = [
-    'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4',
-    'https://assets.mixkit.co/videos/preview/mixkit-portrait-of-a-woman-in-a-pool-1259-large.mp4',
-    'https://assets.mixkit.co/videos/preview/mixkit-mother-with-her-little-daughter-eating-a-marshmallow-in-nature-39764-large.mp4',
-    'https://assets.mixkit.co/videos/preview/mixkit-red-frog-on-a-log-1487-large.mp4',
+    'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1239-large.mp4',
+    'https://assets.mixkit.co/videos/preview/mixkit-portrait-of-a-woman-in-a-pool-1250-large.mp4',
+    'https://assets.mixkit.co/videos/preview/mixkit-mother-with-her-little-daughter-eating-a-marshmallow-in-nature-39763-large.mp4',
+    'https://assets.mixkit.co/videos/preview/mixkit-red-frog-on-a-log-1480-large.mp4',
   ];
 
   @override
@@ -51,9 +56,14 @@ class VideoListGenerator extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: NetworkImage("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/iwIdajr5Y4zq2ibvq75VnDAJBr.jpg"),
+                        child: FutureBuilder(
+                          future: MoviesDB().getAllMovies(),
+                          builder: (context,snapshot) {
+                            return CircleAvatar(
+                              radius: 30,
+                              backgroundImage: NetworkImage(kBaseUrl+snapshot.data.toString()),
+                            );
+                          }
                         ),
                       ),
                       kHieght,

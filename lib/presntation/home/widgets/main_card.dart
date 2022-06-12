@@ -19,7 +19,9 @@ class MainCard2 extends StatelessWidget {
         builder: (BuildContext context,
             AsyncSnapshot<List<MovieDataModel>> snapshot) {
           if (snapshot.data == null) {
-            return CircularProgressIndicator();
+            return SizedBox(
+              width: 130,
+              child: Center(child: CircularProgressIndicator()));
           }
           return Container(
             margin: EdgeInsets.all(8),

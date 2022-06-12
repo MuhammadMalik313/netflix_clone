@@ -49,20 +49,26 @@ class ScreenHome extends StatelessWidget {
                                     if (allmovies.data == null) {
                                       return SizedBox(
                                           height: 500,
-                                          width: 500,
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 1,
+                                        
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 1,
+                                            ),
                                           ));
                                     }
                                     return Container(
-                                        width: double.infinity,
-                                        height: 500,
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                          image: NetworkImage(kBaseUrl +
-                                              allmovies.data![10].posterPath
-                                                  .toString()),
-                                        )));
+                                      width: double.infinity,
+                                      height: 500,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            kBaseUrl +
+                                                allmovies.data![10].posterPath
+                                                    .toString(),
+                                          ),
+                                        ),
+                                      ),
+                                    );
                                   }),
                               Positioned(
                                 bottom: 0,

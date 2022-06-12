@@ -33,11 +33,7 @@ class ScreenNewAndHot extends StatelessWidget {
                 color: Colors.white,
               ),
               kWidth,
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.blue,
-              ),
+             
               kWidth,
             ],
             bottom: TabBar(
@@ -70,31 +66,35 @@ class ScreenNewAndHot extends StatelessWidget {
 
   Widget _buildComingSoon() {
     return FutureBuilder(
-        future:MoviesDB().getTVShow() ,
-        builder: (BuildContext context, AsyncSnapshot<List<MovieDataModel>> heading) {
-          if(heading.data == null){
-            CircularProgressIndicator();
+        future: MoviesDB().getTVShow(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<MovieDataModel>> heading) {
+          if (heading.data != null) {
+             return ListView.builder(
+              shrinkWrap: true,
+              itemCount: 10,
+              itemBuilder: (ctx, index) =>
+                  ComingSoonWidget(index: index, heading: heading.data));
+           
           }
-        return ListView.builder(
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (ctx, index) => ComingSoonWidget(index: index,heading:heading.data));
-      }
-    );
+          return SizedBox(child: Center(child: CircularProgressIndicator()),);
+         
+        });
   }
 
   Widget _buildWatching() {
     return FutureBuilder(
-      future: MoviesDB().getPopular(),
-      builder: (BuildContext context, AsyncSnapshot<List<MovieDataModel>> everyone)  {
-        if(everyone.data==null){
-          return CircularProgressIndicator();
-        }
-        return ListView.builder(
-          itemCount: 10,
-            shrinkWrap: true,
-            itemBuilder: ((context, index) => EveryoneWatching(index: index,everyone:everyone.data!)));
-      }
-    );
+        future: MoviesDB().getPopular(),
+        builder: (BuildContext context,
+            AsyncSnapshot<List<MovieDataModel>> everyone) {
+          if (everyone.data == null) {
+            return CircularProgressIndicator();
+          }
+          return ListView.builder(
+              itemCount: 10,
+              shrinkWrap: true,
+              itemBuilder: ((context, index) =>
+                  EveryoneWatching(index: index, everyone: everyone.data!)));
+        });
   }
 }

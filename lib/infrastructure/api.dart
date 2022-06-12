@@ -6,21 +6,18 @@ import 'models/datamodel/data_model.dart';
 
 abstract class ApiCalls {
   Future getAllMovies();
-   Future getTrending();
+  Future getTrending();
   Future getPopular();
-  Future  getTVShow();
+  Future getTVShow();
   Future getAction();
   Future search(String value);
-  
 }
 
 class MoviesDB extends ApiCalls {
   @override
-
-
-Future<List<MovieDataModel>> getAllMovies() async {
+  Future<List<MovieDataModel>> getAllMovies() async {
     final result = await http.get(Uri.parse(
-        "https://api.themoviedb.org/3/trending/all/day?api_key=f88b478026037712e036ac5db7fe2109"));
+        "https://api.themoviedb.org/3/trending/all/day?api_key=cd675c551c80cf0a7bbc8e02cfdddd8d"));
     Map<String, dynamic> map = json.decode(result.body);
     final data = AllDataModel.fromJson(map);
     return data.results;
@@ -70,7 +67,7 @@ Future<List<MovieDataModel>> getAllMovies() async {
     final data = AllDataModel.fromJson(map);
     return data.results;
   }
-  
+
   // @override
   // Future<List<Genre>> categories() async{
   //    final result = await http.get(Uri.parse(

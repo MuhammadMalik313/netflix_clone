@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
+import 'package:netflix_clone/core/colors/strings.dart';
 import 'package:netflix_clone/core/constants.dart';
+import 'package:netflix_clone/infrastructure/api.dart';
 import 'package:netflix_clone/presntation/mainpage/widgets/bottom_nav.dart';
 import 'package:netflix_clone/presntation/widgets/app_bar_widget.dart';
+
+import '../../../infrastructure/models/datamodel/data_model.dart';
 
 class ScreenDownloads extends StatelessWidget {
   ScreenDownloads({Key? key}) : super(key: key);
@@ -73,7 +77,9 @@ class DownloadImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return 
+    
+    Padding(
       padding: margin,
       child: Transform.rotate(
         angle: angle * pi / 180,
@@ -102,13 +108,24 @@ class Section1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List imageList = [
-      "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
-      "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hIkKM1nlzk8DThFT4vxgW1KoofL.jpg",
-      "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uXEqmloGyP7UXAiphJUu2v2pcuE.jpg"
-    ];
+    // List imageList = [
+    //   "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
+    //   "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/hIkKM1nlzk8DThFT4vxgW1KoofL.jpg",
+    //   "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/uXEqmloGyP7UXAiphJUu2v2pcuE.jpg"
+    // ];
+
+
     final Size size = MediaQuery.of(context).size;
-    return Column(
+  return FutureBuilder(
+      future: MoviesDB().getTVShow(),
+      builder: ((context,AsyncSnapshot<List<MovieDataModel>> snapshot){
+        if(snapshot.data==null){
+          return SizedBox(
+            width: 500,
+            height: 500,
+            child: Center(child: CircularProgressIndicator(),));
+        }
+          return Column(
       children: [
         const Text(
           "Introducing Downloads for you",
@@ -135,21 +152,21 @@ class Section1 extends StatelessWidget {
               DownloadImageWidget(
                 margin: EdgeInsets.only(left: 190, top: 50),
                 size: Size(size.width * .71, size.width * .58),
-                imageList: imageList[1],
+                imageList: kBaseUrl+snapshot.data![1].posterPath!,
                 angle: 25,
                 radius: 10,
               ),
               DownloadImageWidget(
                 margin: EdgeInsets.only(right: 190,top: 50 ),
                 size: Size(size.width * .71, size.width * .58),
-                imageList: imageList[0],
+                imageList: kBaseUrl+snapshot.data![5].posterPath!,
                 angle: -25,
                 radius: 20,
               ),
               DownloadImageWidget(
                 margin: EdgeInsets.only(left: 0, top: 20),
                 size: Size(size.width * .77, size.width * .9),
-                imageList: imageList[2],
+                imageList:  kBaseUrl+snapshot.data![10].posterPath!,
                 radius: 70,
               ),
             ],
@@ -157,6 +174,9 @@ class Section1 extends StatelessWidget {
         ),
       ],
     );
+     
+    }));
+  
   }
 }
 
