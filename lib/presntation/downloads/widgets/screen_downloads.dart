@@ -50,10 +50,12 @@ class SmartDownloads extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(children: const [
       kWidth,
+
       Icon(
         Icons.settings,
         color: kWhiteColor,
       ),
+      kWidth,
       Text("smart Downloads"),
     ]);
   }

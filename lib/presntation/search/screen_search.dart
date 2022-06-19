@@ -8,8 +8,17 @@ import 'package:netflix_clone/presntation/mainpage/widgets/bottom_nav.dart';
 import 'package:netflix_clone/presntation/search/search_result.dart';
 import 'package:netflix_clone/presntation/search/widgets/search_idle.dart';
 
-class ScreenSearch extends StatelessWidget {
+class ScreenSearch extends StatefulWidget {
+
    ScreenSearch({Key? key,}) : super(key: key);
+
+  @override
+  State<ScreenSearch> createState() => _ScreenSearchState();
+}
+
+class _ScreenSearchState extends State<ScreenSearch> {
+
+   var kquery="";
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +31,13 @@ class ScreenSearch extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CupertinoSearchTextField(
-              onSubmitted: ((value) {
-                Navigator.push(context, MaterialPageRoute(builder: (context) =>SearchResultWidget(value:value) ,));
+              
+              onChanged: ((value) {
+                setState(() {
+                kquery=value;
+                });
+                
+
               }),
               backgroundColor: Colors.grey.withOpacity(0.3),
               prefixIcon: const Icon(
@@ -37,7 +51,7 @@ class ScreenSearch extends StatelessWidget {
               style: const TextStyle(color: kWhiteColor),
             ),
             kHieght,
-           Expanded(child: SearchIdleWidget()),
+           Expanded(child: kquery.isEmpty?SearchIdleWidget():SearchResultWidget(value: kquery)),
           // Expanded(child: SearchResultWidget(value,)),
 
           ],

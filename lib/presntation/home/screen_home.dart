@@ -49,7 +49,6 @@ class ScreenHome extends StatelessWidget {
                                     if (allmovies.data == null) {
                                       return SizedBox(
                                           height: 500,
-                                        
                                           child: Center(
                                             child: CircularProgressIndicator(
                                               strokeWidth: 1,
@@ -133,10 +132,15 @@ class ScreenHome extends StatelessWidget {
                                         color: Colors.white,
                                       ),
                                       kWidth,
+                                      kWidth,
                                       Container(
                                         width: 30,
                                         height: 30,
-                                        color: Colors.blue,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    "https://apkvipo.com/wp-content/uploads/2021/04/Smart-Tv-Cast-for-Android.jpg"))),
+                                        // color: Colors.blue,
                                       ),
                                       kWidth
                                     ],

@@ -20,14 +20,15 @@ class AppBarWidget extends StatelessWidget {
         Spacer(),
         Icon(
           Icons.cast,
-          size: 50,
+          size: 30,
           color: Colors.white,
         ),
         kWidth,
         Container(
           width: 30,
           height: 30,
-          color: Colors.blue,
+          decoration: BoxDecoration(image:DecorationImage(image:NetworkImage("https://apkvipo.com/wp-content/uploads/2021/04/Smart-Tv-Cast-for-Android.jpg") ) ),
+          // color: Colors.blue,
         ),
         kWidth,
       ],

@@ -74,7 +74,7 @@ flutter:
   fonts:
     - family: font1
       fonts:
-        - asset: assets/Chewy-Regular.ttf
+        - asset: assets/BebasNeue-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

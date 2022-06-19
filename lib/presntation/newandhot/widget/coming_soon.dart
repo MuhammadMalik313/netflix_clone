@@ -53,17 +53,26 @@ class ComingSoonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Builder(builder: (context) {
-                    return Expanded(
+                    return Flexible(
                       child: Text(
-                        heading![index].originalTitle.toString(),
+                        
+                        heading![index].title.toString(),
+                        maxLines: 1,
+
                         style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "font1"),
+                          
+                        
+                     
+                          overflow: TextOverflow.ellipsis,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w800,
+                            fontFamily: "font1"
+                            
+                            ),
                       ),
                     );
                   }),
-                  Spacer(),
+                
                   Row(
                     children: [
                       CustomButton(
@@ -87,9 +96,9 @@ class ComingSoonWidget extends StatelessWidget {
               kHieght,
               Text("Coming On friday"),
               kHieght,
-              Expanded(
+              Flexible(
                 child: Text(
-                  heading![index].title.toString(),
+                 ( heading![index].originalTitle??heading![index].title).toString(),
                   style: TextStyle(
                     fontSize: 20,
                   ),
